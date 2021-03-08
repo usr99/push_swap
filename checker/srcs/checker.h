@@ -6,14 +6,14 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 23:27:22 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/08 23:10:14 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/08 23:49:02 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHECKER_H
 # define CHECKER_H
 
-# include "../libft/libft.h"
+# include "../../libft/libft.h"
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
