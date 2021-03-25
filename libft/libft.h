@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:52:13 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/07 23:51:41 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/25 14:05:04 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include "ft_printf/ft_printf.h"
 
 typedef struct	s_list
 {
 	void			*content;
 	struct s_list	*next;
+	struct s_list	*prev;
 }				t_list;
 
 typedef struct	s_btree
@@ -75,6 +77,10 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
+void			ft_putchar(char c);
+void			ft_putstr(char *s);
+void			ft_putendl(char *s);
+void			ft_putnbr(int n);
 
 /*
 **	LINKED LIST FUNCTIONS
@@ -115,6 +121,8 @@ void			btree_clear(t_btree **root, void (*del)(void *));
 **	ft_lstdup		-> duplicate the first *length* elements of src
 **	ft_clearstr		-> free the string pointed by str and replace it by a new
 **						empty string
+**	lst_to_array	-> dup a linked list into a char* array
+** 	ft_lst_at		-> get a pointer to the element at position nbr
 */
 
 char			*ft_itoa_base(unsigned long long nbr, char *base);
@@ -122,5 +130,7 @@ int				get_next_line(int fd, char **line);
 void			ft_free_map(char **map);
 t_list			*ft_lstdup(t_list *src, int length);
 char			*ft_clearstr(char *str);
+char			**lst_to_array(t_list *lst);
+t_list			*ft_lst_at(t_list *begin_list, unsigned int nbr);
 
 #endif
