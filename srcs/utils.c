@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 00:01:21 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/25 19:19:56 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/26 03:14:33 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,21 @@ int		find_largest(t_list *a)
 	return (pos);
 }
 
+int		push_a(t_stack *stack, int size, int pos)
+{
+	int	ret;
+	
+	if (pos <= size / 2)
+		ret = add_instructions(stack, "rb", pos);
+	else
+		ret = add_instructions(stack, "rrb", size - pos);
+	if (ret == -1)
+		return (-1);
+	if (add_instructions(stack, "pa", 1) == -1)
+		return (-1);
+	return (0);
+}
+
 int		push_b(t_stack *stack, int size, int pos)
 {
 	int	ret;
@@ -115,4 +130,19 @@ int		push_b(t_stack *stack, int size, int pos)
 	if (add_instructions(stack, "pb", 1) == -1)
 		return (-1);
 	return (0);
+}
+
+int		get_lst_index(t_list *lst, int value)
+{
+	int	index;
+
+	index = 0;
+	while (lst)
+	{
+		if (*(int *)lst->content == value)
+			return (index);
+		index++;
+		lst = lst->next;
+	}
+	return (-1);
 }

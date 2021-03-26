@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 14:59:57 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/25 19:24:12 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/25 22:31:19 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ int	algo_swap(t_stack *stack, int init, int dest, int size)
 	i = init - dest;
 	if (add_instructions(stack, "ra", init - 1) == -1)
 		return (-1);
-	while (i--)
+	while (i-- > 0)
 	{
 		if (add_instructions(stack, "sa", 1) == -1)
 			return (-1);
-		if (i != 0)
+		if (i != 0 || dest != 0)
 		{
 			if (add_instructions(stack, "rra", 1) == -1)
 				return (-1);

@@ -6,23 +6,29 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 03:26:36 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/25 20:27:18 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/26 03:18:43 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	sort_medium(t_stack *stack)
+int		sort_medium(t_stack *stack)
 {
-	int	median;
+	int	quartile;
+	int	size;
 
-	if (get_median_value(stack->a, &median) == -1)
+	size = ft_lstsize(stack->a);
+	while (size > 3)
+	{
+		if (get_quartile_value(stack->a, &quartile) == -1)
+			return (-1);
+		if (push_sub_values(stack, quartile, size) == -1)
+			return (-1);
+		size = ft_lstsize(stack->a);
+	}
+	if (sort_stack_size3(stack) == -1)
 		return (-1);
-	if (push_sub_values(stack, median) == -1)
-		return (-1);
-	if (insertion_sort(stack) == -1)
-		return (-1);
-	if (add_instructions(stack, "pa", ft_lstsize(stack->b)) == -1)
+	if (repush_sub_values(stack) == -1)
 		return (-1);
 
 	/*ft_printf("\033[31m");
@@ -42,25 +48,30 @@ int	sort_medium(t_stack *stack)
 	return (0);
 }
 
-int		get_median_value(t_list *a, int *median)
+int		get_quartile_value(t_list *a, int *quartile)
 {
 	t_list	*lst;
+	t_list	*tmp;
 	int		size;
-	int		i;
+	int		mod;
 
-	i = 0;
 	lst = ft_lstdup(a, ft_lstsize(a));
 	if (!lst)
 		return (-1);
 	ascending_sort(lst);
-	size = (ft_lstsize(a) + 1) / 2;
-	while (++i < size)
-		lst = lst->next;
-	if (size % 2 == 1)
-		*median = (*(int *)lst->content + *(int *)lst->next->content) / 2;
-	else
-		*median = *(int *)lst->content;
-	ft_lstclear(&lst, NULL);
+	tmp = lst;
+	size = (ft_lstsize(a) + 3);
+	mod = size % 4;
+	lst = ft_lst_at(lst, size / 4 - 1);
+	if (mod == 0)
+		*quartile = *(int *)lst->content;
+	else if (mod == 1)
+		*quartile = ((*(int *)lst->content) * 3 + *(int *)lst->next->content) / 4;
+	else if (mod == 2)
+		*quartile = (*(int *)lst->content + *(int *)lst->next->content) / 2;
+	else if (mod == 3)
+		*quartile = (*(int *)lst->content + (*(int *)lst->next->content) * 3) / 4;
+	ft_lstclear(&tmp, NULL);
 	return (0);
 }
 
@@ -84,61 +95,39 @@ void	ascending_sort(t_list *lst)
 	}
 }
 
-int		push_sub_values(t_stack *stack, int median)
+int		push_sub_values(t_stack *stack, int quartile, int size)
 {
-	int		pos_topush;
-	int		size;
-
-	size = ft_lstsize(stack->a);
-	while (1)
+	size /= 4;
+	while (size)
 	{
-		pos_topush = find_smallest(stack->a);
-		if (*(int *)(ft_lst_at(stack->a, pos_topush)->content) >= median)
-			break ;
-		if (push_b(stack, size, pos_topush) == -1)
-			return (-1);
+		if (*(int *)(stack->a->content) <= quartile)
+		{
+			if (add_instructions(stack, "pb", 1) == -1)
+				return (-1);
+		}
+		else
+		{
+			if (add_instructions(stack, "ra", 1) == -1)
+				return (-1);
+			size++;
+		}
 		size--;
 	}
 	return (0);
 }
 
-int	insertion_sort(t_stack *stack)
+int		repush_sub_values(t_stack *stack)
 {
-	t_list	*lst;
-	int		size;
-	int		pos;
+	int	pos;
+	int	size;
 
-	pos = 1;
-	size = ft_lstsize(stack->a);
-	lst = stack->a->next;
-	while (lst)
+	size = ft_lstsize(stack->b);
+	while (size)
 	{
-		if (*(int *)(lst->content) < *(int *)(lst->prev->content))
-		{
-			if (pull_up(stack, lst->content, pos, size) == -1)
-				return (-1);
-			pos = 0;
-			lst = stack->a;
-		}
-		pos++;
-		lst = lst->next;
+		pos = find_largest(stack->b);
+		if (push_a(stack, size, pos) == -1)
+			return (-1);
+		size--;
 	}
 	return (0);
-}
-
-int	pull_up(t_stack *stack, int *val, int pos_init, int size)
-{
-	t_list	*lst;
-	int		(*f)(t_stack*, int, int, int);
-	int		pos_dest;
-
-	pos_dest = pos_init;
-	lst = ft_lst_at(stack->a, pos_init);
-	while (*(int *)(lst->content) >= *val && lst->prev)
-	{
-		pos_dest--;
-		lst = lst->prev;
-	}
-	f = which_algo(pos_init, pos_dest, size);
-	return ((*f)(stack, pos_init, pos_dest, size));
 }

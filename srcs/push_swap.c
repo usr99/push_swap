@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 22:37:09 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/23 03:53:59 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/25 22:15:21 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	push_swap(t_stack *stack)
 	{
 		if (size <= 5 && size)
 			ret = sort_small(stack);
-		else if (size <= 100)
+		else if (size <= 500)
 			ret = sort_medium(stack);
 		/*else
 			ret = sort_big(stack);*/
