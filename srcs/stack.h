@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 22:27:15 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/23 16:21:21 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/27 19:40:23 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ t_list	*get_stack(char **argv);
 int		is_integer(char *str, int **nb);
 int		is_duplicate(t_list *stack, int value);
 void	*destroy_lst(t_list **lst);
+
+t_list	*get_stack_from_file(char **argv);
+t_list	*read_file(int fd);
 
 void	sort_stack(t_list *a, t_list *instructions);
 void	do_sort(char *instruction, t_list **a, t_list **b);

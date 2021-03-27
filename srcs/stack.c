@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:58:25 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/25 14:06:44 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/27 19:40:09 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_list	*get_stack(char **argv)
 	i = 1;
 	new = NULL;
 	stack = NULL;
+	if (ft_strcmp(argv[1], "-f") == 0)
+		return (get_stack_from_file(argv));
 	while (argv[i])
 	{
 		if (is_integer(argv[i], &nb) == -1 || is_duplicate(stack, *nb) != -1)
