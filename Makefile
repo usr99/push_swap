@@ -3,6 +3,7 @@ PUSH			= push_swap
 LIBFT			= libft/libft.a
 SRC_CHECK		= checker.c			\
 					stack.c			\
+					file.c			\
 					instructions.c	\
 					sort.c			\
 					operations.c
@@ -11,6 +12,7 @@ SRC_PUSH		= push_swap.c		\
 					sort_medium.c	\
 					utils.c			\
 					stack.c			\
+					file.c			\
 					sort.c			\
 					operations.c	\
 					algorithm.c
