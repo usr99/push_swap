@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 23:27:22 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/26 03:14:17 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/27 19:47:32 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int				algo_push(t_stack *stack, int init, int dest, int size);
 int				algo_rev_push(t_stack *stack, int init, int dest, int size);
 int				algo_swap(t_stack *stack, int init, int dest, int size);
 int				algo_rev_swap(t_stack *stack, int init, int dest, int size);
-
 
 int				sort_big(t_stack *stack);
 
