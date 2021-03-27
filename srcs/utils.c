@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 00:01:21 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/26 03:14:33 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/27 02:21:51 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int		sort_stack_size3(t_stack *stack)
 	char	rank[4];
 	int		ret;
 
+	if (is_sorted(stack->a) == 0)
+		return (0);
 	ft_bzero(rank, 4);
 	ret = find_smallest(stack->a);
 	rank[ret] = '1';

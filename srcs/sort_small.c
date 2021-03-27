@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 22:56:20 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/23 19:42:08 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/27 02:27:24 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		sort_small(t_stack *stack)
 	int		ret;
 	int		sz_save;
 
+	if (is_sorted(stack->a) == 0)
+		return (0);
 	size = ft_lstsize(stack->a);
 	sz_save = size;
 	while (size > 3)
