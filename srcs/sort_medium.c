@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 03:26:36 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/27 02:47:49 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/27 19:44:30 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ int		push_sub_values(t_stack *stack, int quartile, int size)
 	t_list	*lst;
 	int		pos[2];
 
-	//ft_printf("=== %d === %d ===\n", i, size % 4);
 	while (size > 5)
 	{
 		pos[0] = 0;
@@ -121,46 +120,11 @@ int		push_sub_values(t_stack *stack, int quartile, int size)
 		}
 		if (size - pos[1] < pos[0])
 			pos[0] = pos[1];
-		//ft_printf("%d %d\n", pos[0], pos[1]);
-		//ft_printf("quintile = %d, on push %d | %d\n", quartile, *(int *)(ft_lst_at(stack->a, pos[0])->content));
 		if (push_b(stack, size, pos[0]) == -1)
 			return (-1);
 		size--;
 	}
 	return (0);
-
-	/*
-	t_list	*lst;
-	int		pos[2];
-	int		i;
-
-	i = size / 5;
-	//ft_printf("=== %d ===\n", i);
-	while (i--)
-	{
-		pos[0] = 0;
-		lst = stack->a;
-		while (lst && *(int *)lst->content >= quartile)
-		{
-			pos[0]++;
-			lst = lst->next;
-		}
-		pos[1] = size - 1;
-		lst = ft_lstlast(stack->a);
-		while (lst && *(int *)lst->content >= quartile)
-		{
-			pos[1]--;
-			lst = lst->prev;
-		}
-		if (size - pos[1] < pos[0])
-			pos[0] = pos[1];
-		//ft_printf("quintile = %d, on push %d\n", quartile, *(int *)(ft_lst_at(stack->a, pos[0])->content));
-		if (push_b(stack, size, pos[0]) == -1)
-			return (-1);		
-		size--;
-	}
-	*/
-
 }
 
 int		repush_sub_values(t_stack *stack)
