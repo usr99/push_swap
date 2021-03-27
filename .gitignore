@@ -10,6 +10,4 @@ checker
 push_swap
 
 # Test files
-test
 pyviz.py
-test.sh
