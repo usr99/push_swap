@@ -6,13 +6,11 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 03:26:36 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/28 19:22:40 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/29 00:35:21 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-#define DIV_SIZE 4
 
 int		sort_medium(t_stack *stack)
 {
@@ -20,7 +18,7 @@ int		sort_medium(t_stack *stack)
 	int	size;
 
 	size = ft_lstsize(stack->a);
-	while (size > 5)
+	while (size > 3)
 	{
 		if (get_quartile_value(stack->a, &quartile, size) == -1)
 			return (-1);
@@ -62,15 +60,9 @@ int		get_quartile_value(t_list *a, int *quartile, int size)
 	ascending_sort(lst);
 	tmp = lst;
 
-	/*if (size <= DIV_SIZE + 1)
-	{
-		*quartile = *(int *)ft_lst_at(lst, size - 1)->content;
-		return (0);
-	}*/
-
-	size = (size + DIV_SIZE - 1);
-	mod = size % DIV_SIZE;
-	lst = ft_lst_at(lst, size / DIV_SIZE - 1);
+	size = (size + 4 - 1);
+	mod = size % 4;
+	lst = ft_lst_at(lst, size / 4 - 1);
 	
 	if (mod == 0)
 		*quartile = *(int *)lst->content;
@@ -103,36 +95,20 @@ void	ascending_sort(t_list *lst)
 
 int		push_sub_values(t_stack *stack, int quartile, int size)
 {
-	t_list	*lst;
-	int		pos[2];
-	int		val[2];
-
-	while (size > 5)
+	size /= 4;
+	while (size)
 	{
-		pos[0] = 0;
-		lst = stack->a;
-		while (lst && *(int *)lst->content >= quartile)
+		if (*(int *)(stack->a->content) <= quartile)
 		{
-			pos[0]++;
-			lst = lst->next;
+			if (add_instructions(stack, "pb", 1) == -1)
+				return (-1);
 		}
-		if (pos[0] == size)
-			break ;
-		val[0] = *(int *)lst->content;
-		pos[1] = size - 1;
-		lst = ft_lstlast(stack->a);
-		while (lst && *(int *)lst->content >= quartile)
+		else
 		{
-			pos[1]--;
-			lst = lst->prev;
+			if (add_instructions(stack, "ra", 1) == -1)
+				return (-1);
+			size++;
 		}
-		val[1] = *(int *)lst->content;
-		if (size - pos[1] < pos[0])
-			pos[0] = pos[1];
-		else if (size - pos[1] == pos[0] && val[1] < val[0])
-				pos[0] = pos[1];
-		if (push_b(stack, size, pos[0]) == -1)
-			return (-1);
 		size--;
 	}
 	return (0);
