@@ -6,11 +6,13 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 03:26:36 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/27 22:17:52 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/28 19:22:40 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+#define DIV_SIZE 4
 
 int		sort_medium(t_stack *stack)
 {
@@ -20,7 +22,7 @@ int		sort_medium(t_stack *stack)
 	size = ft_lstsize(stack->a);
 	while (size > 5)
 	{
-		if (get_quartile_value(stack->a, &quartile) == -1)
+		if (get_quartile_value(stack->a, &quartile, size) == -1)
 			return (-1);
 		if (push_sub_values(stack, quartile, size) == -1)
 			return (-1);
@@ -48,11 +50,10 @@ int		sort_medium(t_stack *stack)
 	return (0);
 }
 
-int		get_quartile_value(t_list *a, int *quartile)
+int		get_quartile_value(t_list *a, int *quartile, int size)
 {
 	t_list	*lst;
 	t_list	*tmp;
-	int		size;
 	int		mod;
 
 	lst = ft_lstdup(a, ft_lstsize(a));
@@ -60,17 +61,22 @@ int		get_quartile_value(t_list *a, int *quartile)
 		return (-1);
 	ascending_sort(lst);
 	tmp = lst;
-	size = (ft_lstsize(a) + 3);
-	mod = size % 4;
-	lst = ft_lst_at(lst, size / 4 - 1);
+
+	/*if (size <= DIV_SIZE + 1)
+	{
+		*quartile = *(int *)ft_lst_at(lst, size - 1)->content;
+		return (0);
+	}*/
+
+	size = (size + DIV_SIZE - 1);
+	mod = size % DIV_SIZE;
+	lst = ft_lst_at(lst, size / DIV_SIZE - 1);
+	
 	if (mod == 0)
 		*quartile = *(int *)lst->content;
-	else if (mod == 1)
-		*quartile = ((*(int *)lst->content) * 3 + *(int *)lst->next->content) / 4;
-	else if (mod == 2)
+	else
 		*quartile = (*(int *)lst->content + *(int *)lst->next->content) / 2;
-	else if (mod == 3)
-		*quartile = (*(int *)lst->content + (*(int *)lst->next->content) * 3) / 4;
+		
 	ft_lstclear(&tmp, NULL);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 23:27:22 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/27 21:56:48 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/28 18:29:50 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				push_swap(t_stack *stack);
 int				sort_small(t_stack *stack);
 
 int				sort_medium(t_stack *stack);
-int				get_quartile_value(t_list *a, int *quartile);
+int				get_quartile_value(t_list *a, int *quartile, int size);
 void			ascending_sort(t_list *lst);
 int				push_sub_values(t_stack *stack, int quartile, int size);
 int				repush_sub_values(t_stack *stack);
