@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 03:26:36 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/27 19:48:53 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/27 22:17:52 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int		push_sub_values(t_stack *stack, int quartile, int size)
 {
 	t_list	*lst;
 	int		pos[2];
+	int		val[2];
 
 	while (size > 5)
 	{
@@ -111,6 +112,7 @@ int		push_sub_values(t_stack *stack, int quartile, int size)
 		}
 		if (pos[0] == size)
 			break ;
+		val[0] = *(int *)lst->content;
 		pos[1] = size - 1;
 		lst = ft_lstlast(stack->a);
 		while (lst && *(int *)lst->content >= quartile)
@@ -118,8 +120,11 @@ int		push_sub_values(t_stack *stack, int quartile, int size)
 			pos[1]--;
 			lst = lst->prev;
 		}
+		val[1] = *(int *)lst->content;
 		if (size - pos[1] < pos[0])
 			pos[0] = pos[1];
+		else if (size - pos[1] == pos[0] && val[1] < val[0])
+				pos[0] = pos[1];
 		if (push_b(stack, size, pos[0]) == -1)
 			return (-1);
 		size--;
@@ -141,4 +146,9 @@ int		repush_sub_values(t_stack *stack)
 		size--;
 	}
 	return (0);
+}
+
+int		check_b_order(t_stack *stack, int value)
+{
+
 }
