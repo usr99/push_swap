@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 00:01:21 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/27 02:21:51 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/29 17:42:04 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ int		add_instructions(t_stack *stack, char *instruction, int x)
 		new = ft_lstnew(str);
 		if (!new)
 			return (-1);
+		if (!stack->algorithm)
+			new->prev = NULL;
+		else
+			new->prev = ft_lstlast(stack->algorithm);
 		ft_lstadd_back(&stack->algorithm, new);
 		do_sort(str, &stack->a, &stack->b);
 	}
