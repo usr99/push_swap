@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 23:27:22 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/29 19:13:14 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/29 20:18:37 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int				get_quartile_value(t_list *a, int *quartile, int size);
 void			ascending_sort(t_list *lst);
 int				push_sub_values(t_stack *stack, int quartile, int size);
 int				repush_sub_values(t_stack *stack);
-int				check_b(t_stack *stack, int rb);
+int				check_b(t_stack *stack, int value, int rb);
+int				find_inferior(t_list *a, int value);
 int				rotate_optimization(t_stack *stack, int ra, int rb);
 
 /*int				(*which_algo(int init, int dest, int size))

@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 03:26:36 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/29 20:10:53 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/29 20:21:02 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int		push_sub_values(t_stack *stack, int quartile, int size)
 	{
 		if (*(int *)(stack->a->content) <= quartile)
 		{
-			if (check_b(stack, ra) == -1)
+			if (check_b(stack, *(int *)stack->a->content, ra) == -1)
 				return (-1);
 			if (add_instructions(stack, "pb", 1) == -1)
 				return (-1);
@@ -140,7 +140,7 @@ int		repush_sub_values(t_stack *stack)
 	return (0);
 }
 
-int		check_b(t_stack *stack, int ra)
+int		check_b(t_stack *stack, int value, int ra)
 {
 	int	size;
 	int	pos;
@@ -151,7 +151,7 @@ int		check_b(t_stack *stack, int ra)
 		return (0);
 
 	rb = 0;
-	pos = find_largest(stack->b);
+	pos = find_inferior(stack->b, value);
 	size = ft_lstsize(stack->b);
 	
 	if (pos <= size / 2)
@@ -166,6 +166,27 @@ int		check_b(t_stack *stack, int ra)
 	if (rotate_optimization(stack, ra, rb) == -1)
 		return (-1);
 	return (0);
+}
+
+int		find_inferior(t_list *a, int value)
+{
+	int	pos;
+	int	inf;
+	int	i;
+
+	i = 0;
+	inf = *(int *)a->content;
+	while (a)
+	{
+		if (*(int *)a->content > inf && *(int *)a->content < value)
+		{
+			pos = i;
+			inf = *(int *)a->content;
+		}
+		i++;
+		a = a->next;
+	}
+	return (pos);
 }
 
 int		rotate_optimization(t_stack *stack, int ra, int rb)
