@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 22:37:09 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/27 02:37:00 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/29 01:15:31 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	push_swap(t_stack *stack)
 			ret = sort_medium(stack);
 		/*else
 			ret = sort_big(stack);*/
-		if (ret != -1)
-			ft_lstiter(stack->algorithm, (void (*)(void *))&ft_putendl);
+		/*if (ret != -1)
+			ft_lstiter(stack->algorithm, (void (*)(void *))&ft_putendl);*/
 	}
 	return (ret);
 }

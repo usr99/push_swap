@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 03:26:36 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/29 00:35:21 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/29 17:00:40 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ int		sort_medium(t_stack *stack)
 			return (-1);
 		size = ft_lstsize(stack->a);
 	}
+	ft_printf("%d\n", ft_lstsize(stack->algorithm));
 	if (sort_small(stack) == -1)
 		return (-1);
 	if (repush_sub_values(stack) == -1)
 		return (-1);
+	ft_printf("%d\n", ft_lstsize(stack->algorithm));
 
 	/*ft_printf("\033[34m");
 	while (stack->a)
