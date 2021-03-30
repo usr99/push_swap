@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 03:26:36 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/29 20:21:02 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/30 17:23:50 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int		check_b(t_stack *stack, int value, int ra)
 	int	ret;
 	int	rb;
 
-	if (stack->b == NULL)
+	if (ft_lstsize(stack->b) < 2)
 		return (0);
 
 	rb = 0;
@@ -163,6 +163,7 @@ int		check_b(t_stack *stack, int value, int ra)
 		ret = add_instructions(stack, "rrb", size - pos);
 	if (ret == -1)
 		return (-1);
+
 	if (rotate_optimization(stack, ra, rb) == -1)
 		return (-1);
 	return (0);
@@ -175,6 +176,7 @@ int		find_inferior(t_list *a, int value)
 	int	i;
 
 	i = 0;
+	pos = 0;
 	inf = *(int *)a->content;
 	while (a)
 	{
