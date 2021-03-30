@@ -14,12 +14,11 @@ SRC_PUSH		= push_swap.c		\
 					stack.c			\
 					file.c			\
 					sort.c			\
-					operations.c	\
-					algorithm.c
+					operations.c
 OBJ_CHECK		= ${addprefix ${OBJ_DIR}, ${SRC_CHECK:.c=.o}} 
 OBJ_PUSH		= ${addprefix ${OBJ_DIR}, ${SRC_PUSH:.c=.o}} 
 OBJ_DIR			= objs/
-FLAGS			= -g -Wall -Wextra #-Werror
+FLAGS			= -g -Wall -Wextra #-fsanitize=address #-Werror
 
 ${OBJ_DIR}%.o:	srcs/%.c
 				gcc ${FLAGS} -c $< -o $@

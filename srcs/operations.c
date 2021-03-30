@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 18:47:42 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/25 19:36:06 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/30 03:00:21 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	rotate(t_list **stack)
 	t_list	*last;
 
 	lst = *stack;
+	if (ft_lstsize(lst) < 2)
+		return ;
 	last = ft_lstlast(*stack);
 	last->next = *stack;
 	last->next->prev = last;
