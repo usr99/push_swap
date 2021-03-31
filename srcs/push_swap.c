@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 22:37:09 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/29 18:48:01 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/03/31 22:25:12 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	push_swap(t_stack *stack)
 	{
 		if (size <= 5 && size)
 			ret = sort_small(stack);
-		else if (size <= 500)
+		else if (size <= 100)
 			ret = sort_medium(stack);
-		/*else
-			ret = sort_big(stack);*/
+		else
+			ret = sort_big(stack);
 		if (ret != -1)
 			ft_lstiter(stack->algorithm, (void (*)(void *))&ft_putendl);
 	}
