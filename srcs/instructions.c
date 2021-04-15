@@ -6,21 +6,20 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:57:53 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/08 18:42:20 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/04/15 16:21:49 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-t_list	*read_instructions(void)
+t_list	*read_instructions(int *ret)
 {
 	t_list	*instructions;
 	t_list	*new;
 	char	*line;
-	int		ret;
 
 	instructions = NULL;
-	while ((ret = get_next_line(STDIN_FILENO, &line)) > 0)
+	while ((*ret = get_next_line(STDIN_FILENO, &line)) > 0)
 	{
 		if (is_instruction(line) == -1)
 			return (destroy_lst(&instructions));
@@ -29,7 +28,7 @@ t_list	*read_instructions(void)
 			return (destroy_lst(&instructions));
 		ft_lstadd_back(&instructions, new);
 	}
-	if (ret == -1)
+	if (*ret == -1)
 		return (destroy_lst(&instructions));
 	return (instructions);
 }

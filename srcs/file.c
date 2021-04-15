@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 15:19:04 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/27 19:42:37 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/04/15 14:11:05 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_list	*read_file(int fd)
 			return (destroy_lst(&stack));
 		ft_lstadd_back(&stack, new);
 		new->prev = tmp;
+		free(line);
 	}
+	free(line);
 	return (stack);
 }

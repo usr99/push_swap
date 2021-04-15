@@ -8,9 +8,9 @@ SRC_CHECK		= checker.c			\
 					sort.c			\
 					operations.c
 SRC_PUSH		= push_swap.c		\
-					sort_small.c	\
 					sort_medium.c	\
 					utils.c			\
+					utils2.c		\
 					stack.c			\
 					file.c			\
 					sort.c			\
@@ -18,7 +18,7 @@ SRC_PUSH		= push_swap.c		\
 OBJ_CHECK		= ${addprefix ${OBJ_DIR}, ${SRC_CHECK:.c=.o}} 
 OBJ_PUSH		= ${addprefix ${OBJ_DIR}, ${SRC_PUSH:.c=.o}} 
 OBJ_DIR			= objs/
-FLAGS			= -g -Wall -Wextra #-fsanitize=address #-Werror
+FLAGS			= -Wall -Wextra -Werror
 
 ${OBJ_DIR}%.o:	srcs/%.c
 				gcc ${FLAGS} -c $< -o $@

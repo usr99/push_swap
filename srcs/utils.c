@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 00:01:21 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/29 17:42:04 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/04/15 16:03:22 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,24 @@ int		add_instructions(t_stack *stack, char *instruction, int x)
 	return (0);
 }
 
-int		sort_stack_size3(t_stack *stack)
+void	ascending_sort(t_list *lst)
 {
-	char	rank[4];
-	int		ret;
+	t_list	*save;
+	int		*tmp;
 
-	if (is_sorted(stack->a) == 0)
-		return (0);
-	ft_bzero(rank, 4);
-	ret = find_smallest(stack->a);
-	rank[ret] = '1';
-	ret = find_largest(stack->a);
-	rank[ret] = '3';
-	ret = 0;
-	while (rank[ret])
-		ret++;
-	rank[ret] = '2';
-	if (ft_strncmp(rank, "312", 3) == 0)
-		ret = add_instructions(stack, "ra", 1);
-	else if (ft_strncmp(rank, "231", 3) == 0)
-		ret = add_instructions(stack, "rra", 1);
-	else
-		ret = add_instructions(stack, "sa", 1);
-	if (ret == -1)
-		return (-1);
-	if (ft_strncmp(rank, "132", 3) == 0)
-		ret = add_instructions(stack, "ra", 1);
-	else if (ft_strncmp(rank, "321", 3) == 0)
-		ret = add_instructions(stack, "rra", 1);
-	return (ret);
+	save = lst;
+	while (lst->next)
+	{
+		if (*(int *)lst->content > *(int *)lst->next->content)
+		{
+			tmp = lst->content;
+			lst->content = lst->next->content;
+			lst->next->content = tmp;
+			lst = save;
+		}
+		else
+			lst = lst->next;
+	}
 }
 
 int		find_smallest(t_list *a)
@@ -108,47 +97,24 @@ int		find_largest(t_list *a)
 	return (pos);
 }
 
-int		push_a(t_stack *stack, int size, int pos)
+int		find_inferior(t_list *a, int value)
 {
-	int	ret;
-	
-	if (pos <= size / 2)
-		ret = add_instructions(stack, "rb", pos);
-	else
-		ret = add_instructions(stack, "rrb", size - pos);
-	if (ret == -1)
-		return (-1);
-	if (add_instructions(stack, "pa", 1) == -1)
-		return (-1);
-	return (0);
-}
+	int	pos;
+	int	inf;
+	int	i;
 
-int		push_b(t_stack *stack, int size, int pos)
-{
-	int	ret;
-	
-	if (pos <= size / 2)
-		ret = add_instructions(stack, "ra", pos);
-	else
-		ret = add_instructions(stack, "rra", size - pos);
-	if (ret == -1)
-		return (-1);
-	if (add_instructions(stack, "pb", 1) == -1)
-		return (-1);
-	return (0);
-}
-
-int		get_lst_index(t_list *lst, int value)
-{
-	int	index;
-
-	index = 0;
-	while (lst)
+	i = 0;
+	pos = 0;
+	inf = *(int *)a->content;
+	while (a)
 	{
-		if (*(int *)lst->content == value)
-			return (index);
-		index++;
-		lst = lst->next;
+		if (*(int *)a->content > inf && *(int *)a->content < value)
+		{
+			pos = i;
+			inf = *(int *)a->content;
+		}
+		i++;
+		a = a->next;
 	}
-	return (-1);
+	return (pos);
 }
