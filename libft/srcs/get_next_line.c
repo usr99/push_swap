@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 15:18:27 by mamartin          #+#    #+#             */
-/*   Updated: 2021/03/23 16:18:18 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/04/16 21:15:09 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ static int		search_newline(char **line, char *buf, char **tmp)
 	copy_line(line, tmp);
 	if (index < BUFFER_SIZE - 1)
 		*tmp = ft_strdup(buf + index + 1);
+	if (ft_strlen(*tmp) == 0)
+	{
+		free(*tmp);
+		*tmp = NULL;
+	}
 	return (1);
 }
 

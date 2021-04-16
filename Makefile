@@ -1,19 +1,17 @@
 CHECKER			= checker
 PUSH			= push_swap
 LIBFT			= libft/libft.a
-OBJ_CHECK		= checker/objs
-OBJ_PUSH		= push_swap/objs
 FLAGS			= -Wall -Wextra -Werror
 
 all:			${CHECKER} ${PUSH}
 
 ${CHECKER}:		${LIBFT}
 				${MAKE} -C srcs/checker
-				mv srcs/checker/checker .
+				ln -s srcs/checker/checker .
 
 ${PUSH}:		${LIBFT}
 				${MAKE} -C srcs/push_swap
-				mv srcs/push_swap/push_swap .
+				ln -s srcs/push_swap/push_swap .
 
 ${LIBFT}:
 				${MAKE} -C libft
@@ -25,6 +23,8 @@ clean:
 
 fclean:			clean
 				${MAKE} fclean -C libft
+				${MAKE} fclean -C srcs/checker
+				${MAKE} fclean -C srcs/push_swap
 				rm -rf checker push_swap
 
 re:				fclean all
