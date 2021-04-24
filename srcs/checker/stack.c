@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:58:25 by mamartin          #+#    #+#             */
-/*   Updated: 2021/04/16 03:03:09 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/04/20 20:56:44 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		is_integer(char *str, int **nb)
 	int		i;
 
 	i = 0;
-	if (str[0] == '-' && ft_strlen(str) == 1)
+	if ((str[0] == '-' && ft_strlen(str) == 1) || ft_strlen(str) == 0)
 		return (-1);
 	if (str[0] == '-')
 		i = 1;

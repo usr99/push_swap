@@ -6,7 +6,7 @@
 /*   By: mamartin <mamartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 18:41:40 by mamartin          #+#    #+#             */
-/*   Updated: 2021/04/16 20:51:32 by mamartin         ###   ########.fr       */
+/*   Updated: 2021/04/20 20:54:08 by mamartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	sort_stack(t_list *a, t_list *instructions)
 	else
 		ft_putstr_fd("OK\n", STDOUT_FILENO);
 	ft_lstclear(&a, &free);
+	ft_lstclear(&b, &free);
 }
 
 void	do_sort(char *instruction, t_list **a, t_list **b)
